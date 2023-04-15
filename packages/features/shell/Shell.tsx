@@ -47,13 +47,11 @@ import {
 import {
   FiArrowLeft,
   FiArrowRight,
-  FiBarChart,
   FiCalendar,
   FiClock,
   FiDownload,
   FiExternalLink,
   FiFileText,
-  FiGrid,
   FiHelpCircle,
   FiLink,
   FiLogOut,
@@ -64,11 +62,9 @@ import {
   FiSettings,
   FiSlack,
   FiUsers,
-  FiZap,
 } from "@calcom/ui/components/icon";
 
 import FreshChatProvider from "../ee/support/lib/freshchat/FreshChatProvider";
-import { TeamInviteBadge } from "./TeamInviteBadge";
 
 // need to import without ssr to prevent hydration errors
 const Tips = dynamic(() => import("@calcom/features/tips").then((mod) => mod.Tips), {
@@ -477,47 +473,52 @@ const navigation: NavigationItemType[] = [
     icon: FiClock,
   },
   {
-    name: "teams",
-    href: "/teams",
+    name: "buddy",
+    href: "/buddy",
     icon: FiUsers,
-    onlyDesktop: true,
-    badge: <TeamInviteBadge />,
   },
-  {
-    name: "apps",
-    href: "/apps",
-    icon: FiGrid,
-    isCurrent: ({ router, item }) => {
-      const path = router.asPath.split("?")[0];
-      // During Server rendering path is /v2/apps but on client it becomes /apps(weird..)
-      return (
-        (path.startsWith(item.href) || path.startsWith("/v2" + item.href)) && !path.includes("routing-forms/")
-      );
-    },
-    child: [
-      {
-        name: "app_store",
-        href: "/apps",
-        isCurrent: ({ router, item }) => {
-          const path = router.asPath.split("?")[0];
-          // During Server rendering path is /v2/apps but on client it becomes /apps(weird..)
-          return (
-            (path.startsWith(item.href) || path.startsWith("/v2" + item.href)) &&
-            !path.includes("routing-forms/") &&
-            !path.includes("/installed")
-          );
-        },
-      },
-      {
-        name: "installed_apps",
-        href: "/apps/installed/calendar",
-        isCurrent: ({ router }) => {
-          const path = router.asPath;
-          return path.startsWith("/apps/installed/") || path.startsWith("/v2/apps/installed/");
-        },
-      },
-    ],
-  },
+  // {
+  //   name: "teams",
+  //   href: "/teams",
+  //   icon: FiUsers,
+  //   onlyDesktop: true,
+  //   badge: <TeamInviteBadge />,
+  // },
+  // {
+  //   name: "apps",
+  //   href: "/apps",
+  //   icon: FiGrid,
+  //   isCurrent: ({ router, item }) => {
+  //     const path = router.asPath.split("?")[0];
+  //     // During Server rendering path is /v2/apps but on client it becomes /apps(weird..)
+  //     return (
+  //       (path.startsWith(item.href) || path.startsWith("/v2" + item.href)) && !path.includes("routing-forms/")
+  //     );
+  //   },
+  //   child: [
+  //     {
+  //       name: "app_store",
+  //       href: "/apps",
+  //       isCurrent: ({ router, item }) => {
+  //         const path = router.asPath.split("?")[0];
+  //         // During Server rendering path is /v2/apps but on client it becomes /apps(weird..)
+  //         return (
+  //           (path.startsWith(item.href) || path.startsWith("/v2" + item.href)) &&
+  //           !path.includes("routing-forms/") &&
+  //           !path.includes("/installed")
+  //         );
+  //       },
+  //     },
+  //     {
+  //       name: "installed_apps",
+  //       href: "/apps/installed/calendar",
+  //       isCurrent: ({ router }) => {
+  //         const path = router.asPath;
+  //         return path.startsWith("/apps/installed/") || path.startsWith("/v2/apps/installed/");
+  //       },
+  //     },
+  //   ],
+  // },
   {
     name: MORE_SEPARATOR_NAME,
     href: "/more",
@@ -531,16 +532,16 @@ const navigation: NavigationItemType[] = [
       return router.asPath.startsWith("/apps/routing-forms/");
     },
   },
-  {
-    name: "workflows",
-    href: "/workflows",
-    icon: FiZap,
-  },
-  {
-    name: "insights",
-    href: "/insights",
-    icon: FiBarChart,
-  },
+  // {
+  //   name: "workflows",
+  //   href: "/workflows",
+  //   icon: FiZap,
+  // },
+  // {
+  //   name: "insights",
+  //   href: "/insights",
+  //   icon: FiBarChart,
+  // },
   {
     name: "settings",
     href: "/settings/my-account/profile",
