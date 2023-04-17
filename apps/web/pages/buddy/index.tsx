@@ -5,13 +5,13 @@ import Shell from "@calcom/features/shell/Shell";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import useMediaQuery from "@calcom/lib/hooks/useMediaQuery";
 import { EmptyScreen, HeadSeo } from "@calcom/ui";
-import { FiUsers } from "@calcom/ui/components/icon";
+import { Users } from "@calcom/ui/components/icon";
 
 const CreateFirstBuddyView = () => {
   const { t } = useLocale();
 
   return (
-    <EmptyScreen Icon={FiUsers} headline={t("new_buddy_heading")} description={t("new_buddy_description")} />
+    <EmptyScreen Icon={Users} headline={t("new_buddy_heading")} description={t("new_buddy_description")} />
   );
 };
 
