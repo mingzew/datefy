@@ -1,1 +1,1 @@
-web: npx turbo run @calcom/web#start
+web: yarn dx; npx turbo run @calcom/web#start
