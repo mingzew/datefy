@@ -1,11 +1,10 @@
-import { useRouter } from "next/router";
-
 import { NewScheduleButton } from "@calcom/features/schedules";
 import Shell from "@calcom/features/shell/Shell";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
-import useMediaQuery from "@calcom/lib/hooks/useMediaQuery";
 import { EmptyScreen, HeadSeo } from "@calcom/ui";
 import { Users } from "@calcom/ui/components/icon";
+
+import PageWrapper from "@components/PageWrapper";
 
 const CreateFirstBuddyView = () => {
   const { t } = useLocale();
@@ -17,9 +16,6 @@ const CreateFirstBuddyView = () => {
 
 const BuddyPage = () => {
   const { t } = useLocale();
-  const router = useRouter();
-
-  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <div>
@@ -37,5 +33,7 @@ const BuddyPage = () => {
     </div>
   );
 };
+
+BuddyPage.PageWrapper = PageWrapper;
 
 export default BuddyPage;
