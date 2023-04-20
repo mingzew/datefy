@@ -82,8 +82,6 @@ apps/storybook/build-storybook.log
 .snaplet/structure.d.ts
 
 # Submodules
-.gitmodules
-apps/api
 apps/website
 apps/console
 apps/auth
