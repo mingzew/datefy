@@ -6,6 +6,8 @@ import { Users } from "@calcom/ui/components/icon";
 
 import PageWrapper from "@components/PageWrapper";
 
+import PageWrapper from "@components/PageWrapper";
+
 const CreateFirstBuddyView = () => {
   const { t } = useLocale();
 
