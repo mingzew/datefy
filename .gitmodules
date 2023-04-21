@@ -2,4 +2,4 @@
 	branch = main
 [submodule "apps/api"]
 	path = apps/api
-	url = https://github.com/calcom/api.git
+	url = git@github.com:mingzew/datetify-api.git
