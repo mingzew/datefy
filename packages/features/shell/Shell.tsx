@@ -382,7 +382,7 @@ function UserDropdown({ small }: { small?: boolean }) {
                   </>
                 )}
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                {/* <DropdownMenuItem>
                   <DropdownItem
                     StartIcon={(props) => <Slack strokeWidth={1.5} {...props} />}
                     target="_blank"
@@ -390,12 +390,12 @@ function UserDropdown({ small }: { small?: boolean }) {
                     href={JOIN_SLACK}>
                     {t("join_our_slack")}
                   </DropdownItem>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
+                </DropdownMenuItem> */}
+                {/* <DropdownMenuItem>
                   <DropdownItem StartIcon={Map} target="_blank" href={ROADMAP}>
                     {t("visit_roadmap")}
                   </DropdownItem>
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
                 <DropdownMenuItem>
                   <DropdownItem
                     type="button"
@@ -404,11 +404,11 @@ function UserDropdown({ small }: { small?: boolean }) {
                     {t("help")}
                   </DropdownItem>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="desktop-hidden hidden lg:flex">
+                {/* <DropdownMenuItem className="desktop-hidden hidden lg:flex">
                   <DropdownItem StartIcon={Download} target="_blank" rel="noreferrer" href={DESKTOP_APP_LINK}>
                     {t("download_desktop_app")}
                   </DropdownItem>
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
 
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>

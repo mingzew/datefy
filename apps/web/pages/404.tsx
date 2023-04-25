@@ -246,9 +246,9 @@ export default function Custom404() {
                 )}
               </div>
               <div className="mt-12">
-                <h2 className="text-subtle text-sm font-semibold uppercase tracking-wide">
+                {/* <h2 className="text-subtle text-sm font-semibold uppercase tracking-wide">
                   {t("popular_pages")}
-                </h2>
+                </h2> */}
                 {!isSubpage && isCalcom && (
                   <ul role="list" className="mt-4">
                     <li className="border-2 border-green-500 px-4 py-2">
@@ -281,7 +281,7 @@ export default function Custom404() {
                   </ul>
                 )}
 
-                <ul role="list" className="border-subtle divide-subtle mt-4 divide-y">
+                {/* <ul role="list" className="border-subtle divide-subtle mt-4 divide-y">
                   {links.map((link, linkIdx) => (
                     <li key={linkIdx} className="px-4 py-2">
                       <Link
@@ -352,7 +352,7 @@ export default function Custom404() {
                       </div>
                     </a>
                   </li>
-                </ul>
+                </ul> */}
                 <div className="mt-8">
                   <Link href="/" className="hover:text-subtle text-emphasis text-base font-medium">
                     {t("or_go_back_home")}

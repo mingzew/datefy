@@ -14,7 +14,7 @@ import { Button, StepCard, Steps } from "@calcom/ui";
 import type { inferSSRProps } from "@lib/types/inferSSRProps";
 
 import PageWrapper from "@components/PageWrapper";
-import { ConnectedCalendars } from "@components/getting-started/steps-views/ConnectCalendars";
+// import { ConnectedCalendars } from "@components/getting-started/steps-views/ConnectCalendars";
 import { SetupAvailability } from "@components/getting-started/steps-views/SetupAvailability";
 import UserProfile from "@components/getting-started/steps-views/UserProfile";
 import { UserSettings } from "@components/getting-started/steps-views/UserSettings";
@@ -22,7 +22,8 @@ import { UserSettings } from "@components/getting-started/steps-views/UserSettin
 export type IOnboardingPageProps = inferSSRProps<typeof getServerSideProps>;
 
 const INITIAL_STEP = "user-settings";
-const steps = ["user-settings", "connected-calendar", "setup-availability", "user-profile"] as const;
+// const steps = ["user-settings", "connected-calendar", "setup-availability", "user-profile"] as const;
+const steps = ["user-settings", "setup-availability", "user-profile"] as const;
 
 const stepTransform = (step: (typeof steps)[number]) => {
   const stepIndex = steps.indexOf(step);
@@ -50,11 +51,11 @@ const OnboardingPage = (props: IOnboardingPageProps) => {
       title: `${t("welcome_to_cal_header", { appName: APP_NAME })}`,
       subtitle: [`${t("we_just_need_basic_info")}`, `${t("edit_form_later_subtitle")}`],
     },
-    {
-      title: `${t("connect_your_calendar")}`,
-      subtitle: [`${t("connect_your_calendar_instructions")}`],
-      skipText: `${t("connect_calendar_later")}`,
-    },
+    // {
+    //   title: `${t("connect_your_calendar")}`,
+    //   subtitle: [`${t("connect_your_calendar_instructions")}`],
+    //   skipText: `${t("connect_calendar_later")}`,
+    // },
     {
       title: `${t("set_availability")}`,
       subtitle: [
@@ -120,10 +121,10 @@ const OnboardingPage = (props: IOnboardingPageProps) => {
             <StepCard>
               {currentStep === "user-settings" && <UserSettings user={user} nextStep={() => goToIndex(1)} />}
 
-              {currentStep === "connected-calendar" && <ConnectedCalendars nextStep={() => goToIndex(2)} />}
+              {/* {currentStep === "connected-calendar" && <ConnectedCalendars nextStep={() => goToIndex(2)} />} */}
 
               {currentStep === "setup-availability" && (
-                <SetupAvailability nextStep={() => goToIndex(3)} defaultScheduleId={user.defaultScheduleId} />
+                <SetupAvailability nextStep={() => goToIndex(2)} defaultScheduleId={user.defaultScheduleId} />
               )}
 
               {currentStep === "user-profile" && <UserProfile user={user} />}

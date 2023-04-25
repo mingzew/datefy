@@ -54,30 +54,30 @@ const tabs: VerticalTabItemProps[] = [
       { name: "impersonation", href: "/settings/security/impersonation" },
     ],
   },
-  {
-    name: "billing",
-    href: "/settings/billing",
-    icon: CreditCard,
-    children: [{ name: "manage_billing", href: "/settings/billing" }],
-  },
-  {
-    name: "developer",
-    href: "/settings/developer",
-    icon: Terminal,
-    children: [
-      //
-      { name: "webhooks", href: "/settings/developer/webhooks" },
-      { name: "api_keys", href: "/settings/developer/api-keys" },
-      // TODO: Add profile level for embeds
-      // { name: "embeds", href: "/v2/settings/developer/embeds" },
-    ],
-  },
-  {
-    name: "teams",
-    href: "/settings/teams",
-    icon: Users,
-    children: [],
-  },
+  // {
+  //   name: "billing",
+  //   href: "/settings/billing",
+  //   icon: CreditCard,
+  //   children: [{ name: "manage_billing", href: "/settings/billing" }],
+  // },
+  // {
+  //   name: "developer",
+  //   href: "/settings/developer",
+  //   icon: Terminal,
+  //   children: [
+  //     //
+  //     { name: "webhooks", href: "/settings/developer/webhooks" },
+  //     { name: "api_keys", href: "/settings/developer/api-keys" },
+  //     // TODO: Add profile level for embeds
+  //     // { name: "embeds", href: "/v2/settings/developer/embeds" },
+  //   ],
+  // },
+  // {
+  //   name: "teams",
+  //   href: "/settings/teams",
+  //   icon: Users,
+  //   children: [],
+  // },
   {
     name: "admin",
     href: "/settings/admin",

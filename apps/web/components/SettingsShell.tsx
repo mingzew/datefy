@@ -13,26 +13,26 @@ const tabs = [
     href: "/settings/my-account/profile",
     icon: User,
   },
-  {
-    name: "teams",
-    href: "/settings/teams",
-    icon: Users,
-  },
+  // {
+  //   name: "teams",
+  //   href: "/settings/teams",
+  //   icon: Users,
+  // },
   {
     name: "security",
     href: "/settings/security",
     icon: Key,
   },
-  {
-    name: "developer",
-    href: "/settings/developer",
-    icon: Terminal,
-  },
-  {
-    name: "billing",
-    href: "/settings/billing",
-    icon: CreditCard,
-  },
+  // {
+  //   name: "developer",
+  //   href: "/settings/developer",
+  //   icon: Terminal,
+  // },
+  // {
+  //   name: "billing",
+  //   href: "/settings/billing",
+  //   icon: CreditCard,
+  // },
   {
     name: "admin",
     href: "/settings/admin",

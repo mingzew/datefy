@@ -1,16 +1,13 @@
 import { useState } from "react";
 import { useChat } from "react-live-chat-loader";
 
-import classNames from "@calcom/lib/classNames";
+import { SUPPORT_MAIL_ADDRESS } from "@calcom/lib/constants";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import { trpc } from "@calcom/trpc/react";
-import { Button, showToast, TextArea } from "@calcom/ui";
-import { ExternalLink, AlertTriangle } from "@calcom/ui/components/icon";
+import { showToast } from "@calcom/ui";
 
 import { useFreshChat } from "../lib/freshchat/FreshChatProvider";
-import { isFreshChatEnabled } from "../lib/freshchat/FreshChatScript";
-import { isInterComEnabled, useIntercom } from "../lib/intercom/useIntercom";
-import ContactMenuItem from "./ContactMenuItem";
+import { useIntercom } from "../lib/intercom/useIntercom";
 
 interface HelpMenuItemProps {
   onHelpItemSelect: () => void;
@@ -46,7 +43,7 @@ export default function HelpMenuItem({ onHelpItemSelect }: HelpMenuItemProps) {
 
   return (
     <div className="bg-default border-default w-full rounded-md">
-      <div className="w-full py-5">
+      {/* <div className="w-full py-5">
         <p className="text-subtle mb-1 px-5">{t("resources").toUpperCase()}</p>
         <a
           onClick={() => onHelpItemSelect()}
@@ -65,10 +62,10 @@ export default function HelpMenuItem({ onHelpItemSelect }: HelpMenuItemProps) {
         <div>
           <ContactMenuItem onHelpItemSelect={onHelpItemSelect} />
         </div>
-      </div>
+      </div> */}
 
-      <hr className="border-muted" />
-      <div className="w-full p-5">
+      {/* <hr className="border-muted" /> */}
+      {/* <div className="w-full p-5">
         <p className="text-subtle mb-1">{t("feedback").toUpperCase()}</p>
         <p className="text-default flex w-full py-2 text-sm font-medium">{t("comments")}</p>
 
@@ -182,10 +179,10 @@ export default function HelpMenuItem({ onHelpItemSelect }: HelpMenuItemProps) {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
       <div className="text-subtle bg-muted w-full p-5">
         <p className="">{t("specific_issue")}</p>
-        <button
+        {/* <button
           className="hover:text-emphasis text-defualt font-medium underline"
           onClick={async () => {
             setActive(true);
@@ -200,15 +197,15 @@ export default function HelpMenuItem({ onHelpItemSelect }: HelpMenuItemProps) {
             onHelpItemSelect();
           }}>
           {t("contact_support")}
-        </button>
-        <span> {t("or").toLowerCase()} </span>
+        </button> */}
+        <span> {t("Email")} </span>
         <a
-          onClick={() => onHelpItemSelect()}
+          // onClick={() => onHelpItemSelect()}
           className="hover:text-emphasis text-defualt font-medium underline"
-          href="https://cal.com/docs"
+          href={`mailto:${SUPPORT_MAIL_ADDRESS}`}
           target="_blank"
           rel="noreferrer">
-          {t("browse_our_docs")}
+          {SUPPORT_MAIL_ADDRESS}
         </a>
         .
       </div>
