@@ -5,5 +5,10 @@
     "source.fixAll.eslint": true
   },
   "typescript.preferences.importModuleSpecifier": "non-relative",
+<<<<<<< HEAD
+=======
+  "spellright.language": ["en"],
+  "spellright.documentTypes": ["markdown", "typescript", "typescriptreact"],
+>>>>>>> 1eeb91a79 (perf: lazy load tRPC routes (#8167))
   "tailwindCSS.experimental.classRegex": [["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]]
 }
