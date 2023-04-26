@@ -1807,5 +1807,6 @@
   "default_date_schedule_name": "Available times",
 
   "email_invite_team": "{{email}} has been invited",
+  "error_collecting_card": "Error collecting card",
   "image_size_limit_exceed": "Uploaded image shouldn't exceed 5mb size limit"
 }
