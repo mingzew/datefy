@@ -12,14 +12,24 @@ export const defaultDayRange: TimeRange = {
   end: new Date(new Date().setUTCHours(17, 0, 0, 0)),
 };
 
+export const defaultNightsRange: TimeRange = {
+  start: new Date(new Date().setUTCHours(18, 0, 0, 0)),
+  end: new Date(new Date().setUTCHours(21, 0, 0, 0)),
+};
+
+export const defaultBrunchRange: TimeRange = {
+  start: new Date(new Date().setUTCHours(11, 0, 0, 0)),
+  end: new Date(new Date().setUTCHours(14, 0, 0, 0)),
+};
+
 export const DEFAULT_SCHEDULE: Schedule = [
+  [defaultNightsRange],
   [],
-  [defaultDayRange],
-  [defaultDayRange],
-  [defaultDayRange],
-  [defaultDayRange],
-  [defaultDayRange],
   [],
+  [],
+  [defaultNightsRange],
+  [defaultNightsRange],
+  [defaultNightsRange],
 ];
 
 export function getAvailabilityFromSchedule(schedule: Schedule): Availability[] {

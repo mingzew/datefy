@@ -82,21 +82,173 @@ const UserProfile = (props: IUserProfileProps) => {
     });
   }
 
+  const DEFAULT_BOOKING_FIELDS = [
+    {
+      name: "name",
+      defaultLabel: "your_name",
+      type: "name",
+      required: true,
+      editable: "system",
+      sources: [
+        {
+          id: "default",
+          type: "default",
+          label: "Default",
+        },
+      ],
+    },
+    {
+      name: "email",
+      defaultLabel: "email_address",
+      type: "email",
+      required: true,
+      editable: "system",
+      sources: [
+        {
+          id: "default",
+          type: "default",
+          label: "Default",
+        },
+      ],
+    },
+    {
+      name: "location",
+      defaultLabel: "location",
+      type: "radioInput",
+      getOptionsAt: "locations",
+      optionsInputs: {
+        phone: {
+          type: "phone",
+          required: true,
+          placeholder: "",
+        },
+        attendeeInPerson: {
+          type: "address",
+          required: true,
+          placeholder: "",
+        },
+      },
+      hideWhenJustOneOption: true,
+      required: false,
+      editable: "system",
+      sources: [
+        {
+          id: "default",
+          type: "default",
+          label: "Default",
+        },
+      ],
+    },
+    {
+      name: "location",
+      label: "location",
+      placeholder: "Suggest location that works for you if the one shown doesn't",
+      type: "textarea",
+      required: false,
+      editable: "user",
+      sources: [
+        {
+          id: "user",
+          type: "user",
+          label: "User",
+          fieldRequired: false,
+        },
+      ],
+    },
+    {
+      name: "notes",
+      defaultLabel: "additional_notes",
+      defaultPlaceholder: "share_additional_notes",
+      type: "textarea",
+      required: false,
+      editable: "system-but-optional",
+      sources: [
+        {
+          id: "default",
+          type: "default",
+          label: "Default",
+        },
+      ],
+    },
+    {
+      name: "guests",
+      defaultLabel: "additional_guests",
+      type: "multiemail",
+      required: false,
+      hidden: false,
+      editable: "system-but-optional",
+      sources: [
+        {
+          id: "default",
+          type: "default",
+          label: "Default",
+        },
+      ],
+    },
+    {
+      name: "rescheduleReason",
+      defaultLabel: "reschedule_reason",
+      defaultPlaceholder: "reschedule_placeholder",
+      views: [
+        {
+          label: "Reschedule View",
+          id: "reschedule",
+        },
+      ],
+      type: "textarea",
+      required: false,
+      editable: "system-but-optional",
+      sources: [
+        {
+          id: "default",
+          type: "default",
+          label: "Default",
+        },
+      ],
+    },
+  ];
+
   const DEFAULT_EVENT_TYPES = [
     {
-      title: t("15min_meeting"),
-      slug: "15min",
-      length: 15,
-    },
-    {
-      title: t("30min_meeting"),
-      slug: "30min",
+      title: "Food & drinks",
+      slug: "food",
+      description: "Let's meet to grab a bite and a drink",
       length: 30,
+      slotInterval: 30,
+      minimumBookingNotice: 720,
+      disableGuests: true,
+      location: {
+        type: "inPerson",
+        address: "TBD",
+        displaceLocationPublicly: true,
+      },
+      bookingFields: DEFAULT_BOOKING_FIELDS,
     },
     {
-      title: t("secret_meeting"),
-      slug: "secret",
-      length: 15,
+      title: "Casual date",
+      slug: "casual",
+      description: "Coffee or boba",
+      length: 30,
+      slotInterval: 30,
+      minimumBookingNotice: 720,
+      disableGuests: true,
+      location: {
+        type: "inPerson",
+        address: "TBD",
+        displaceLocationPublicly: true,
+      },
+      bookingFields: DEFAULT_BOOKING_FIELDS,
+    },
+    {
+      title: "Hangout",
+      slug: "hangout",
+      description: "Low key hangout session",
+      length: 30,
+      slotInterval: 15,
+      minimumBookingNotice: 720,
+      metadata: {
+        multipleDuration: [30, 60, 90, 120],
+      },
       hidden: true,
     },
   ];
