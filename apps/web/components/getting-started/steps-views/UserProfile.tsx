@@ -213,15 +213,17 @@ const UserProfile = (props: IUserProfileProps) => {
       title: "Food & drinks",
       slug: "food",
       description: "Let's meet to grab a bite and a drink",
-      length: 30,
+      length: 60,
       slotInterval: 30,
       minimumBookingNotice: 720,
       disableGuests: true,
-      location: {
-        type: "inPerson",
-        address: "TBD",
-        displaceLocationPublicly: true,
-      },
+      locations: [
+        {
+          type: "inPerson",
+          address: "TBD",
+          displayLocationPublicly: true,
+        },
+      ],
       bookingFields: DEFAULT_BOOKING_FIELDS,
     },
     {
@@ -232,11 +234,13 @@ const UserProfile = (props: IUserProfileProps) => {
       slotInterval: 30,
       minimumBookingNotice: 720,
       disableGuests: true,
-      location: {
-        type: "inPerson",
-        address: "TBD",
-        displaceLocationPublicly: true,
-      },
+      locations: [
+        {
+          type: "inPerson",
+          address: "TBD",
+          displayLocationPublicly: true,
+        },
+      ],
       bookingFields: DEFAULT_BOOKING_FIELDS,
     },
     {

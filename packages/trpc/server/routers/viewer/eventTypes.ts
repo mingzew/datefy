@@ -6,6 +6,7 @@ import { z } from "zod";
 
 import getAppKeysFromSlug from "@calcom/app-store/_utils/getAppKeysFromSlug";
 import type { LocationObject } from "@calcom/app-store/locations";
+import { LocationType } from "@calcom/app-store/locations";
 import { DailyLocationType } from "@calcom/app-store/locations";
 import { stripeDataSchema } from "@calcom/app-store/stripepayment/lib/server";
 import getApps, { getAppFromLocationValue, getAppFromSlug } from "@calcom/app-store/utils";
@@ -457,14 +458,17 @@ export const eventTypesRouter = router({
     const defaultConferencingData = userMetadataSchema.parse(ctx.user.metadata)?.defaultConferencingApp;
     const appKeys = await getAppKeysFromSlug("daily-video");
 
-    let locations: { type: string; link?: string }[] = [];
+    let locations:
+      | { type: string; link?: string }[]
+      | { type: string; address: string; displayLocationPublicly: boolean }[] = [];
+    let virtualLocations: { type: string; link?: string }[] = [];
 
     // If no locations are passed in and the user has a daily api key then default to daily
     if (
       (typeof rest?.locations === "undefined" || rest.locations?.length === 0) &&
       typeof appKeys.api_key === "string"
     ) {
-      locations = [{ type: DailyLocationType }];
+      virtualLocations = [{ type: DailyLocationType }];
     }
 
     // If its defaulting to daily no point handling compute as its done
@@ -472,7 +476,29 @@ export const eventTypesRouter = router({
       const credentials = ctx.user.credentials;
       const foundApp = getApps(credentials).filter((app) => app.slug === defaultConferencingData.appSlug)[0]; // There is only one possible install here so index [0] is the one we are looking for ;
       const locationType = foundApp?.locationOption?.value ?? DailyLocationType; // Default to Daily if no location type is found
-      locations = [{ type: locationType, link: defaultConferencingData.appLink }];
+      virtualLocations = [{ type: locationType, link: defaultConferencingData.appLink }];
+    }
+
+    //handles irl locations
+    let irlLocations: { type: string; address: string; displayLocationPublicly: boolean }[] = [];
+    if (typeof rest?.locations !== "undefined" && rest.locations.length > 0) {
+      irlLocations = rest.locations
+        .filter(
+          (location) =>
+            location.type === LocationType.InPerson || location.type === LocationType.AttendeeInPerson
+        )
+        .map((location) => ({
+          type: location.type,
+          address: location.address ?? "TBD",
+          displayLocationPublicly: location.displayLocationPublicly ?? true,
+        }));
+    }
+
+    // Assign locations to virtual or irl
+    if (irlLocations.length > 0) {
+      locations = irlLocations;
+    } else if (virtualLocations.length > 0) {
+      locations = virtualLocations;
     }
 
     const data: Prisma.EventTypeCreateInput = {
