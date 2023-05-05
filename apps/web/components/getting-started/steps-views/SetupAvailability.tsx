@@ -57,12 +57,12 @@ const SetupAvailability = (props: ISetupAvailabilityProps) => {
           if (defaultScheduleId) {
             await updateSchedule.mutate({
               scheduleId: defaultScheduleId,
-              name: t("default_schedule_name"),
+              name: t("default_date_schedule_name"),
               ...values,
             });
           } else {
             await createSchedule.mutate({
-              name: t("default_schedule_name"),
+              name: t("default_date_schedule_name"),
               ...values,
             });
           }

@@ -3,6 +3,7 @@
 # .env file
 .env
 !packages/prisma/.env
+*env_variables.yaml
 
 # dependencies
 node_modules
@@ -94,3 +95,6 @@ apps/auth
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+#
+scripts/keepAlive/.cache

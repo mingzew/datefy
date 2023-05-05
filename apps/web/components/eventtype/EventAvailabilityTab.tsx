@@ -193,7 +193,7 @@ const EventTypeSchedule = ({ eventType }: { eventType: EventTypeSetup }) => {
       ) {
         options.push({
           value: watchSchedule,
-          label: eventType.scheduleName ?? t("default_schedule_name"),
+          label: eventType.scheduleName ?? t("default_date_schedule_name"),
           isDefault: false,
           isManaged: false,
         });

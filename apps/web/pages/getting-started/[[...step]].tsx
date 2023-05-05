@@ -129,7 +129,8 @@ const OnboardingPage = (props: IOnboardingPageProps) => {
 
               {currentStep === "user-profile" && <UserProfile user={user} />}
             </StepCard>
-            {headers[currentStepIndex]?.skipText && (
+            {/* skip button */}
+            {/* {headers[currentStepIndex]?.skipText && (
               <div className="flex w-full flex-row justify-center">
                 <Button
                   color="minimal"
@@ -142,7 +143,7 @@ const OnboardingPage = (props: IOnboardingPageProps) => {
                   {headers[currentStepIndex]?.skipText}
                 </Button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

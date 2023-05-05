@@ -517,3 +517,31 @@ Special thanks to these amazing projects which help power Cal.com:
 <a href="https://jitsu.com/?utm_source=cal.com-gihub"><img height="40px" src="https://jitsu.com/img/powered-by-jitsu.png?gh=true" alt="Jitsu.com"></a>
 
 Cal.com is an [open startup](https://cal.com/open) and [Jitsu](https://github.com/jitsucom/jitsu) (an open-source Segment alternative) helps us to track most of the usage metrics.
+
+
+# Datetify Specific Tips
+
+
+### Generate package anaylyzer
+
+Run bundle analyzer:
+```
+ANALYZE=true yarn build
+```
+
+### Ignore lint and precheck
+Go to `/web/next.config.js` and set
+```
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+```
+
+# heroku postgres
+
+```
+heroku pg:psql -c "SELECT * FROM pg_stat_activity;" --app datetify-db-prod-1
+```

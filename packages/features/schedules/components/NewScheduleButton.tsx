@@ -80,7 +80,7 @@ export function NewScheduleButton({
             type="text"
             id="name"
             required
-            placeholder={t("default_schedule_name")}
+            placeholder={t("default_date_schedule_name")}
             {...register("name")}
           />
           <DialogFooter>

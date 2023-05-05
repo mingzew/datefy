@@ -190,10 +190,10 @@ function EventTypeSingleLayout({
             ? `${
                 eventType.scheduleName
                   ? `${eventType.scheduleName} - ${t("managed")}`
-                  : `default_schedule_name`
+                  : `default_date_schedule_name`
               }`
-            : eventType.scheduleName ?? `default_schedule_name`
-          : `default_schedule_name`,
+            : eventType.scheduleName ?? `default_date_schedule_name`
+          : `default_date_schedule_name`,
     });
     // If there is a team put this navigation item within the tabs
     if (team) {

@@ -1788,11 +1788,14 @@
   "charge_card_dialog_body": "You are about to charge the attendee {{amount, currency}}. Are you sure you want to continue?",
   "charge_attendee": "Charge attendee {{amount, currency}}",
   "payment_app_commission": "Require payment ({{paymentFeePercentage}}% + {{fee, currency}} commission per transaction)",
+
   "buddy": "Buddy",
   "buddy_page_title": "Buddy",
   "buddy_page_subtitle": "Invite a friend/family to them look out for you during your outtings",
   "new_buddy_heading": "Invite your first friend/family",
   "new_buddy_description": "Having a buddy lets you share itineraries and live location data during your outtings. They will recieve automated notifications before and during your scheduled date.",
+  "default_date_schedule_name": "Available times",
+
   "email_invite_team": "{{email}} has been invited",
   "image_size_limit_exceed": "Uploaded image shouldn't exceed 5mb size limit"
 }
