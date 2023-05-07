@@ -9,7 +9,7 @@ import { getServerSession } from "@calcom/features/auth/lib/getServerSession";
 import { APP_NAME } from "@calcom/lib/constants";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import prisma from "@calcom/prisma";
-import { Button, StepCard, Steps } from "@calcom/ui";
+import { StepCard, Steps } from "@calcom/ui";
 
 import type { inferSSRProps } from "@lib/types/inferSSRProps";
 

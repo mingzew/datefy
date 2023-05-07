@@ -3,7 +3,7 @@ import React from "react";
 
 import Shell from "@calcom/features/shell/Shell";
 import { ErrorBoundary } from "@calcom/ui";
-import { CreditCard, Key, Lock, Terminal, User, Users } from "@calcom/ui/components/icon";
+import { Key, Lock, User } from "@calcom/ui/components/icon";
 
 import NavTabs from "./NavTabs";
 

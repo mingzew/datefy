@@ -210,8 +210,8 @@ const UserProfile = (props: IUserProfileProps) => {
 
   const DEFAULT_EVENT_TYPES = [
     {
-      title: "Food & drinks",
-      slug: "food",
+      title: "Food & Drinks",
+      slug: "food-and-drinks",
       description: "Let's meet to grab a bite and a drink",
       length: 60,
       slotInterval: 30,
@@ -228,7 +228,24 @@ const UserProfile = (props: IUserProfileProps) => {
     },
     {
       title: "Casual date",
-      slug: "casual",
+      slug: "casual-date",
+      description: "Coffee or boba",
+      length: 30,
+      slotInterval: 30,
+      minimumBookingNotice: 720,
+      disableGuests: true,
+      locations: [
+        {
+          type: "inPerson",
+          address: "TBD",
+          displayLocationPublicly: true,
+        },
+      ],
+      bookingFields: DEFAULT_BOOKING_FIELDS,
+    },
+    {
+      title: "friend date",
+      slug: "friend-date",
       description: "Coffee or boba",
       length: 30,
       slotInterval: 30,
