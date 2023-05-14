@@ -24,6 +24,7 @@ export type IOnboardingPageProps = inferSSRProps<typeof getServerSideProps>;
 
 const INITIAL_STEP = "user-settings";
 const steps = ["user-settings", "setup-availability", "user-profile"] as const;
+
 // const steps = [
 //   "user-settings",
 //   "connected-calendar",
@@ -63,11 +64,11 @@ const OnboardingPage = (props: IOnboardingPageProps) => {
     //   subtitle: [`${t("connect_your_calendar_instructions")}`],
     //   skipText: `${t("connect_calendar_later")}`,
     // },
-    {
-      title: `${t("connect_your_video_app")}`,
-      subtitle: [`${t("connect_your_video_app_instructions")}`],
-      skipText: `${t("set_up_later")}`,
-    },
+    // {
+    //   title: `${t("connect_your_video_app")}`,
+    //   subtitle: [`${t("connect_your_video_app_instructions")}`],
+    //   skipText: `${t("set_up_later")}`,
+    // },
     {
       title: `${t("set_availability")}`,
       subtitle: [
