@@ -1,29 +1,31 @@
+/* eslint-disable turbo/no-undeclared-env-vars */
 const puppeteer = require("puppeteer");
 require("dotenv").config();
 
 exports.keepAliveDatetify = async (req, res) => {
+  const myDomain = process.env.DOMAIN;
   // Define an array of page URLs to load
   const pageUrls = [
-    "https://www.datetify.app/signup",
-    "https://www.datetify.app/keepaliveworker",
-    "https://www.datetify.app/auth/logout",
-    "https://www.datetify.app/keepaliveworker/food?duration=30",
+    myDomain + "/signup",
+    myDomain + "/keepaliveworker",
+    myDomain + "/auth/logout",
+    myDomain + "/keepaliveworker/food?duration=30",
   ];
 
   const authenticatedPageUrls = [
-    "https://www.datetify.app/event-types",
-    "https://www.datetify.app/bookings/upcoming",
-    "https://www.datetify.app/availability",
-    "https://www.datetify.app/settings/my-account/profile",
-    "https://www.datetify.app/event-types/31",
-    "https://www.datetify.app/event-types/31?tabName=setup",
-    "https://www.datetify.app/event-types/31?tabName=availability",
-    "https://www.datetify.app/event-types/31?tabName=limits",
-    "https://www.datetify.app/event-types/31?tabName=advanced",
-    "https://www.datetify.app/event-types/31?tabName=recurring",
-    "https://www.datetify.app/event-types/31?tabName=apps",
-    "https://www.datetify.app/event-types/31?tabName=workflows",
-    "https://www.datetify.app/event-types/31?tabName=webhooks",
+    myDomain + "/event-types",
+    myDomain + "/bookings/upcoming",
+    myDomain + "/availability",
+    myDomain + "/settings/my-account/profile",
+    myDomain + "/31",
+    myDomain + "/31?tabName=setup",
+    myDomain + "/31?tabName=availability",
+    myDomain + "/31?tabName=limits",
+    myDomain + "/31?tabName=advanced",
+    myDomain + "/31?tabName=recurring",
+    myDomain + "/31?tabName=apps",
+    myDomain + "/31?tabName=workflows",
+    myDomain + "/31?tabName=webhooks",
   ];
 
   while (true) {
@@ -50,7 +52,7 @@ exports.keepAliveDatetify = async (req, res) => {
         await new Promise((resolve) => setTimeout(resolve, 8000));
       }
 
-      await page.goto("https://www.datetify.app/auth/login", {
+      await page.goto(myDomain + "/auth/login", {
         waitUntil: "networkidle0",
         timeout: 0,
       });
