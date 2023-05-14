@@ -49,6 +49,9 @@ yarn-error.log*
 # Webstorm
 .idea
 
+# Cache
+scripts/keepAlive/.cache
+
 ### VisualStudioCode template
 .vscode/*
 !.vscode/settings.json

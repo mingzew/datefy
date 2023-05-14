@@ -1793,6 +1793,13 @@
   "insights": "Insights",
   "testing_workflow_info_message": "When testing this workflow, be aware that Emails and SMS can only be scheduled at least 1 hour in advance",
   "insights_no_data_found_for_filter": "No data found for the selected filter or selected dates.",
+  
+  "buddy": "Buddy",
+  "buddy_page_title": "Buddy",
+  "buddy_page_subtitle": "Invite a friend/family to them look out for you during your outtings",
+  "new_buddy_heading": "Invite your first friend/family",
+  "new_buddy_description": "Having a buddy lets you share itineraries and live location data during your outtings. They will recieve automated notifications before and during your scheduled date.",
+
   "acknowledge_booking_no_show_fee": "I acknowledge that if I do not attend this event that a {{amount, currency}} no show fee will be applied to my card.",
   "card_details": "Card details",
   "seats_and_no_show_fee_error": "Currently cannot enable seats and charge a no-show fee",
