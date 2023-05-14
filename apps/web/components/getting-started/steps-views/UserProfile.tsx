@@ -244,7 +244,7 @@ const UserProfile = (props: IUserProfileProps) => {
       bookingFields: DEFAULT_BOOKING_FIELDS,
     },
     {
-      title: "friend date",
+      title: "Friend Date",
       slug: "friend-date",
       description: "Coffee or boba",
       length: 30,
