@@ -481,9 +481,11 @@ const navigation: NavigationItemType[] = [
     icon: Clock,
   },
   // {
-  //   name: "buddy",
-  //   href: "/buddy",
+  //   name: "teams",
+  //   href: "/teams",
   //   icon: Users,
+  //   onlyDesktop: true,
+  //   badge: <TeamInviteBadge />,
   // },
   // {
   //   name: "apps",
@@ -521,6 +523,11 @@ const navigation: NavigationItemType[] = [
   //   ],
   // },
   // {
+  //   name: "buddy",
+  //   href: "/buddy",
+  //   icon: Users,
+  // },
+  // {
   //   name: MORE_SEPARATOR_NAME,
   //   href: "/more",
   //   icon: MoreHorizontal,
@@ -543,76 +550,6 @@ const navigation: NavigationItemType[] = [
   //   href: "/insights",
   //   icon: BarChart,
   // },
-  {
-    name: "teams",
-    href: "/teams",
-    icon: Users,
-    onlyDesktop: true,
-    badge: <TeamInviteBadge />,
-  },
-  {
-    name: "apps",
-    href: "/apps",
-    icon: Grid,
-    isCurrent: ({ router, item }) => {
-      const path = router.asPath.split("?")[0];
-      // During Server rendering path is /v2/apps but on client it becomes /apps(weird..)
-      return (
-        (path.startsWith(item.href) || path.startsWith("/v2" + item.href)) && !path.includes("routing-forms/")
-      );
-    },
-    child: [
-      {
-        name: "app_store",
-        href: "/apps",
-        isCurrent: ({ router, item }) => {
-          const path = router.asPath.split("?")[0];
-          // During Server rendering path is /v2/apps but on client it becomes /apps(weird..)
-          return (
-            (path.startsWith(item.href) || path.startsWith("/v2" + item.href)) &&
-            !path.includes("routing-forms/") &&
-            !path.includes("/installed")
-          );
-        },
-      },
-      {
-        name: "installed_apps",
-        href: "/apps/installed/calendar",
-        isCurrent: ({ router }) => {
-          const path = router.asPath;
-          return path.startsWith("/apps/installed/") || path.startsWith("/v2/apps/installed/");
-        },
-      },
-    ],
-  },
-  {
-    name: "buddy",
-    href: "/buddy",
-    icon: Users,
-  },
-  {
-    name: MORE_SEPARATOR_NAME,
-    href: "/more",
-    icon: MoreHorizontal,
-  },
-  {
-    name: "Routing Forms",
-    href: "/apps/routing-forms/forms",
-    icon: FileText,
-    isCurrent: ({ router }) => {
-      return router.asPath.startsWith("/apps/routing-forms/");
-    },
-  },
-  {
-    name: "workflows",
-    href: "/workflows",
-    icon: Zap,
-  },
-  {
-    name: "insights",
-    href: "/insights",
-    icon: BarChart,
-  },
   {
     name: "settings",
     href: "/settings/my-account/profile",
