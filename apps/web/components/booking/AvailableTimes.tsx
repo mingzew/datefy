@@ -102,7 +102,7 @@ const AvailableTimes: FC<AvailableTimesProps> = ({
           </div>
           <div
             ref={ref}
-            className="scroll-bar scrollbar-track-w-20 relative -mb-4 flex-grow overflow-y-auto sm:block md:h-[364px]">
+            className="scroll-bar scrollbar-track-w-20 relative -mb-4 flex-grow overflow-y-auto sm:block md:h-[150px]">
             {slots.length > 0 &&
               slots.map((slot) => {
                 type BookingURL = {

@@ -110,6 +110,7 @@ model EventType {
   bookingLimits           Json?
   /// @zod.custom(imports.intervalLimitsType)
   durationLimits          Json?
+  activity_datetify       Activity_Datetify[]     @relation("activity_datetify_eventtype")
 
   @@unique([userId, slug])
   @@unique([teamId, slug])
@@ -164,66 +165,67 @@ enum UserPermissionRole {
 }
 
 model User {
-  id                   Int                     @id @default(autoincrement())
-  username             String?                 @unique
-  name                 String?
+  id                        Int                     @id @default(autoincrement())
+  username                  String?                 @unique
+  name                      String?
   /// @zod.email()
-  email                String                  @unique
-  emailVerified        DateTime?
-  password             String?
-  bio                  String?
-  avatar               String?
-  timeZone             String                  @default("Europe/London")
-  weekStart            String                  @default("Sunday")
+  email                     String                  @unique
+  emailVerified             DateTime?
+  password                  String?
+  bio                       String?
+  avatar                    String?
+  timeZone                  String                  @default("Europe/London")
+  weekStart                 String                  @default("Sunday")
   // DEPRECATED - TO BE REMOVED
-  startTime            Int                     @default(0)
-  endTime              Int                     @default(1440)
+  startTime                 Int                     @default(0)
+  endTime                   Int                     @default(1440)
   // </DEPRECATED>
-  bufferTime           Int                     @default(0)
-  hideBranding         Boolean                 @default(false)
-  theme                String?
-  createdDate          DateTime                @default(now()) @map(name: "created")
-  trialEndsAt          DateTime?
-  eventTypes           EventType[]             @relation("user_eventtype")
-  credentials          Credential[]
-  teams                Membership[]
-  bookings             Booking[]
-  schedules            Schedule[]
-  defaultScheduleId    Int?
-  selectedCalendars    SelectedCalendar[]
-  completedOnboarding  Boolean                 @default(false)
-  locale               String?
-  timeFormat           Int?                    @default(12)
-  twoFactorSecret      String?
-  twoFactorEnabled     Boolean                 @default(false)
-  identityProvider     IdentityProvider        @default(CAL)
-  identityProviderId   String?
-  availability         Availability[]
-  invitedTo            Int?
-  webhooks             Webhook[]
-  brandColor           String                  @default("#292929")
-  darkBrandColor       String                  @default("#fafafa")
+  bufferTime                Int                     @default(0)
+  hideBranding              Boolean                 @default(false)
+  theme                     String?
+  createdDate               DateTime                @default(now()) @map(name: "created")
+  trialEndsAt               DateTime?
+  eventTypes                EventType[]             @relation("user_eventtype")
+  credentials               Credential[]
+  teams                     Membership[]
+  bookings                  Booking[]
+  schedules                 Schedule[]
+  defaultScheduleId         Int?
+  selectedCalendars         SelectedCalendar[]
+  completedOnboarding       Boolean                 @default(false)
+  locale                    String?
+  timeFormat                Int?                    @default(12)
+  twoFactorSecret           String?
+  twoFactorEnabled          Boolean                 @default(false)
+  identityProvider          IdentityProvider        @default(CAL)
+  identityProviderId        String?
+  availability              Availability[]
+  invitedTo                 Int?
+  webhooks                  Webhook[]
+  brandColor                String                  @default("#292929")
+  darkBrandColor            String                  @default("#fafafa")
   // the location where the events will end up
-  destinationCalendar  DestinationCalendar?
-  away                 Boolean                 @default(false)
+  destinationCalendar       DestinationCalendar?
+  away                      Boolean                 @default(false)
   // participate in dynamic group booking or not
-  allowDynamicBooking  Boolean?                @default(true)
+  allowDynamicBooking       Boolean?                @default(true)
   /// @zod.custom(imports.userMetadata)
-  metadata             Json?
-  verified             Boolean?                @default(false)
-  role                 UserPermissionRole      @default(USER)
-  disableImpersonation Boolean                 @default(false)
-  impersonatedUsers    Impersonations[]        @relation("impersonated_user")
-  impersonatedBy       Impersonations[]        @relation("impersonated_by_user")
-  apiKeys              ApiKey[]
-  accounts             Account[]
-  sessions             Session[]
-  Feedback             Feedback[]
-  ownedEventTypes      EventType[]             @relation("owner")
-  workflows            Workflow[]
-  routingForms         App_RoutingForms_Form[] @relation("routing-form")
-  verifiedNumbers      VerifiedNumber[]
-  hosts                Host[]
+  metadata                  Json?
+  verified                  Boolean?                @default(false)
+  role                      UserPermissionRole      @default(USER)
+  disableImpersonation      Boolean                 @default(false)
+  impersonatedUsers         Impersonations[]        @relation("impersonated_user")
+  impersonatedBy            Impersonations[]        @relation("impersonated_by_user")
+  apiKeys                   ApiKey[]
+  accounts                  Account[]
+  sessions                  Session[]
+  Feedback                  Feedback[]
+  ownedEventTypes           EventType[]             @relation("owner")
+  workflows                 Workflow[]
+  routingForms              App_RoutingForms_Form[] @relation("routing-form")
+  verifiedNumbers           VerifiedNumber[]
+  hosts                     Host[]
+  favoriteActivitesDatetify Activity_Datetify[]     @relation("user_activity_datetify")
 
   @@index([email])
   @@index([emailVerified])
@@ -842,4 +844,13 @@ view BookingTimeStatus {
   teamId      Int?
   eventLength Int?
   timeStatus  String?
+}
+
+model Activity_Datetify {
+  id          Int         @id @default(autoincrement())
+  eventTypes  EventType[] @relation("activity_datetify_eventtype")
+  data        Json?
+  type        String
+  description String?
+  user        User[]      @relation("user_activity_datetify")
 }

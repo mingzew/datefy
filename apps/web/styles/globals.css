@@ -498,3 +498,8 @@ select:focus {
 }
 
 
+@media (max-width: 767px) {
+  .mobile-full-width {
+    width: 100%;
+  }
+}

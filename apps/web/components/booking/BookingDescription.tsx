@@ -4,13 +4,11 @@ import { useEffect } from "react";
 import dayjs from "@calcom/dayjs";
 import classNames from "@calcom/lib/classNames";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
-import { SchedulingType } from "@calcom/prisma/enums";
 import { Badge } from "@calcom/ui";
 import { CheckSquare, Clock } from "@calcom/ui/components/icon";
 
 import useRouterQuery from "@lib/hooks/useRouterQuery";
 
-import { UserAvatars } from "@components/booking/UserAvatars";
 import EventTypeDescriptionSafeHTML from "@components/eventtype/EventTypeDescriptionSafeHTML";
 
 import type { AvailabilityPageProps } from "../../pages/[user]/[type]";
@@ -76,17 +74,6 @@ const BookingDescription: FC<Props> = (props) => {
   }
   return (
     <>
-      <UserAvatars
-        profile={profile}
-        users={eventType.users}
-        showMembers={eventType.schedulingType !== SchedulingType.ROUND_ROBIN}
-        size="sm"
-        truncateAfter={3}
-      />
-      <h2 className="text-default mt-1 mb-2 break-words text-sm font-medium ">{profile.name}</h2>
-      <h1 className="font-cal  text-emphasis mb-6 break-words text-2xl font-semibold leading-none">
-        {eventType.title}
-      </h1>
       <div className=" text-default flex flex-col space-y-4 text-sm font-medium">
         {eventType?.description && (
           <div

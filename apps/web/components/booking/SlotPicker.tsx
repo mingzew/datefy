@@ -159,12 +159,12 @@ export const SlotPicker = ({
   })();
 
   return (
-    <>
+    <div className="flex flex-col">
       <DatePicker
         isLoading={isLoading}
         className={classNames(
-          "mt-8 px-4 pb-4 sm:mt-0 md:min-w-[300px] md:px-4 lg:min-w-[455px]",
-          selectedDate ? " border-subtle sm:border-r sm:p-4 sm:pr-6" : "sm:p-4"
+          "mt-8 px-4 pb-4 sm:mt-0 md:max-w-[300px] md:px-4 lg:max-w-[455px]",
+          selectedDate ? " border-subtle sm:border-b sm:p-4 sm:pr-6" : "sm:p-4"
         )}
         includedDates={Object.keys(monthSlots).filter((k) => monthSlots[k].length > 0)}
         locale={isLocaleReady ? i18n.language : "en"}
@@ -196,6 +196,6 @@ export const SlotPicker = ({
         ethSignature={ethSignature}
         duration={parseInt(duration)}
       />
-    </>
+    </div>
   );
 };

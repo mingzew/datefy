@@ -1,4 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
+import dynamic from "next/dynamic";
+import { useMemo, useState } from "react";
 
 import type { Dayjs } from "@calcom/dayjs";
 import dayjs from "@calcom/dayjs";
@@ -9,6 +11,13 @@ import { useLocale } from "@calcom/lib/hooks/useLocale";
 import { weekdayNames } from "@calcom/lib/weekday";
 import { Button, SkeletonText } from "@calcom/ui";
 import { ArrowRight } from "@calcom/ui/components/icon";
+
+const TimezoneDropdownWidget = dynamic(
+  () => import("../../../apps/web/components/booking/TimezoneDropdown").then((mod) => mod.TimezoneDropdown),
+  {
+    ssr: false,
+  }
+);
 
 export type DatePickerProps = {
   /** which day of the week to render the calendar. Usually Sunday (=0) or Monday (=1) - default: Sunday */
@@ -183,6 +192,12 @@ const DatePicker = ({
   onMonthChange,
   ...passThroughProps
 }: DatePickerProps & Partial<React.ComponentProps<typeof Days>>) => {
+  const [timeZone, setTimeZone] = useState<string>();
+
+  const timezoneDropdown = useMemo(
+    () => <TimezoneDropdownWidget timeZone={timeZone} onChangeTimeZone={setTimeZone} />,
+    [timeZone]
+  );
   const browsingDate = passThroughProps.browsingDate || dayjs().startOf("month");
   const { i18n } = useLocale();
 

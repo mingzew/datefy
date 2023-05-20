@@ -10,7 +10,13 @@ import type { Props } from "./pages/AvailabilityPage";
 
 const excludeNullValues = (value: unknown) => !!value;
 
-export function AvailableEventLocations({ locations }: { locations: Props["eventType"]["locations"] }) {
+export function AvailableEventLocations({
+  locations,
+  selectedInd,
+}: {
+  locations: Props["eventType"]["locations"];
+  selectedInd?: number;
+}) {
   const { t } = useLocale();
 
   const renderLocations = locations.map((location, index) => {
@@ -61,8 +67,8 @@ export function AvailableEventLocations({ locations }: { locations: Props["event
 
   const filteredLocations = renderLocations.filter(excludeNullValues) as JSX.Element[];
   return filteredLocations.length ? (
-    <div className="text-default mr-6 flex w-full flex-col space-y-4 break-words text-sm">
-      {filteredLocations}
+    <div className="text-default mr-6 flex w-full flex-col space-y-4 break-words rounded-lg bg-[#D4C5F3] bg-opacity-50 p-2 text-sm">
+      {!!selectedInd ? [filteredLocations[selectedInd]] : filteredLocations[0]}
     </div>
   ) : null;
 }

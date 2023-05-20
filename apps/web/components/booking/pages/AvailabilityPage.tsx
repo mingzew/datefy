@@ -19,18 +19,19 @@ import getPaymentAppData from "@calcom/lib/getPaymentAppData";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import useTheme from "@calcom/lib/hooks/useTheme";
 import notEmpty from "@calcom/lib/notEmpty";
-import { getRecurringFreq } from "@calcom/lib/recurringStrings";
 import { detectBrowserTimeFormat, setIs24hClockInLocalStorage, TimeFormat } from "@calcom/lib/timeFormat";
+import { SchedulingType } from "@calcom/prisma/enums";
 import { trpc } from "@calcom/trpc";
-import { HeadSeo, NumberInput, useCalcomTheme } from "@calcom/ui";
-import { CreditCard, User, RefreshCcw } from "@calcom/ui/components/icon";
+import { HeadSeo, useCalcomTheme } from "@calcom/ui";
 
 import { timeZone as localStorageTimeZone } from "@lib/clock";
 
 import type { Gate, GateState } from "@components/Gates";
 import Gates from "@components/Gates";
-import BookingDescription from "@components/booking/BookingDescription";
+import { AvailableEventLocations } from "@components/booking/AvailableEventLocations";
+import { SelectableEventLocations } from "@components/booking/SelectableEventLocations";
 import { SlotPicker } from "@components/booking/SlotPicker";
+import { UserAvatars } from "@components/booking/UserAvatars";
 
 import type { AvailabilityPageProps } from "../../../pages/[user]/[type]";
 import type { DynamicAvailabilityPageProps } from "../../../pages/d/[link]/[slug]";
@@ -64,7 +65,7 @@ const useBrandColors = ({ brandColor, darkBrandColor }: { brandColor: string; da
   useCalcomTheme(brandTheme);
 };
 
-const AvailabilityPage = ({ profile, eventType, ...restProps }: Props) => {
+const AvailabilityPage = ({ profile, eventType, favoriteActivites, ...restProps }: Props) => {
   const router = useRouter();
   const isEmbed = useIsEmbed(restProps.isEmbed);
   const query = dateQuerySchema.parse(router.query);
@@ -83,6 +84,8 @@ const AvailabilityPage = ({ profile, eventType, ...restProps }: Props) => {
 
   const [timeZone, setTimeZone] = useState<string>();
   const [timeFormat, setTimeFormat] = useState<TimeFormat>(detectBrowserTimeFormat);
+
+  const [selectedLocationInd, setSelectedLocationInd] = useState(0);
 
   const onTimeFormatChange = (is24Hours: boolean) => {
     setTimeFormat(is24Hours ? TimeFormat.TWENTY_FOUR_HOUR : TimeFormat.TWELVE_HOUR);
@@ -147,6 +150,11 @@ const AvailabilityPage = ({ profile, eventType, ...restProps }: Props) => {
     }
   );
 
+  const handleLocationSelect = (index: number) => {
+    console.log("Selected location index:", index);
+    setSelectedLocationInd(index);
+  };
+
   return (
     <Gates gates={gates} appData={rainbowAppData} dispatch={gateDispatcher}>
       <HeadSeo
@@ -172,94 +180,91 @@ const AvailabilityPage = ({ profile, eventType, ...restProps }: Props) => {
       <div>
         <main
           className={classNames(
-            "flex flex-col md:mx-4",
+            "flex-col md:mx-4 md:flex lg:flex",
             shouldAlignCentrally ? "items-center" : "items-start",
-            !isEmbed && classNames("bg-subtle dark:bg-default mx-auto my-0 ease-in-out md:my-24")
+            !isEmbed && classNames("bg-subtle dark:bg-default mx-auto my-0 ease-in-out md:my-12")
           )}>
           <div>
-            <div
-              style={availabilityDatePickerEmbedStyles}
-              className={classNames(
-                isBackgroundTransparent ? "" : "bg-default dark:bg-muted pb-4 md:pb-0",
-                "border-booker md:border-booker-width md:rounded-md",
-                isEmbed && "mx-auto"
-              )}>
-              <div className="md:flex">
-                {showEventTypeDetails && (
+            <div>
+              {/* profile and name */}
+              <div
+                className={classNames(
+                  "flex flex-row p-5",
+                  "min-w-full space-x-5 md:w-[230px] md:min-w-[230px]",
+                  recurringEventCount && "xl:w-[380px] xl:min-w-[380px]"
+                )}>
+                <UserAvatars
+                  profile={profile}
+                  users={eventType.users}
+                  showMembers={eventType.schedulingType !== SchedulingType.ROUND_ROBIN}
+                  size="sm"
+                  truncateAfter={3}
+                />
+                <h2 className="text-default mt-1 mb-2 break-words text-lg font-medium ">{profile.name}</h2>
+              </div>
+
+              {/* create an event banner with a picture */}
+              <div className="relative">
+                <div
+                  className={classNames(
+                    isBackgroundTransparent
+                      ? ""
+                      : "dark:bg-muted h-64 bg-cover bg-center bg-no-repeat pb-4 md:pb-0"
+                  )}
+                  style={{
+                    backgroundImage: 'url("/default-event-banner.png")',
+                    backgroundColor: "#F4F0EA",
+                  }}>
                   <div
                     className={classNames(
-                      " border-subtle flex flex-col p-5 sm:border-r",
-                      "min-w-full md:w-[230px] md:min-w-[230px]",
+                      " border-subtle flex flex-col p-5",
+                      "min-w-full space-x-5 space-y-5 md:w-[230px] md:min-w-[230px]",
                       recurringEventCount && "xl:w-[380px] xl:min-w-[380px]"
                     )}>
-                    <BookingDescription profile={profile} eventType={eventType} rescheduleUid={rescheduleUid}>
-                      {rescheduleUid && eventType.seatsPerTimeSlot && bookingAttendees && (
+                    <h1 className="font-cal text-emphasis mb-6 break-words text-2xl font-semibold leading-none">
+                      {eventType.title}
+                    </h1>
+                    <div className={classNames("text-default absolute bottom-5 left-0 mb-4 mr-4")}>
+                      <AvailableEventLocations
+                        selectedInd={selectedLocationInd}
+                        locations={eventType.locations as AvailabilityPageProps["eventType"]["locations"]}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* create a section where user can select one of the location options that goes from left to right.
+             Each location option should have a background image and a title.
+             The user can select one of the location options and it will be highlighted.
+             Make the locations options scrollable from left to right */}
+              <div className="flex max-w-[986px] flex-col md:max-w-[986px] md:flex-row">
+                <div className="flex flex-col md:max-w-[550px]">
+                  <div className="mobile-full-width">
+                    <SelectableEventLocations
+                      locations={eventType.locations as AvailabilityPageProps["eventType"]["locations"]}
+                      onLocationSelect={handleLocationSelect}
+                    />
+                  </div>
+
+                  <div
+                    style={availabilityDatePickerEmbedStyles}
+                    className={classNames(
+                      isBackgroundTransparent ? "" : "bg-default dark:bg-muted flex flex-col pb-4 md:pb-0",
+                      "border-booker md:border-booker-width mobile-full-width md:rounded-md",
+                      isEmbed && "mx-auto"
+                    )}>
+                    <div>
+                      {showEventTypeDetails && (
                         <div
                           className={classNames(
-                            "flex flex-nowrap items-center text-sm font-medium",
-                            " text-default",
-                            "ltr:mr-[10px] rtl:ml-[10px]"
+                            " border-subtle flex flex-col p-5 sm:border-r",
+                            "min-w-full md:w-1/2 md:min-w-[230px]",
+                            recurringEventCount && "xl:w-[380px] xl:min-w-[380px]"
                           )}>
-                          <User
-                            className={classNames(
-                              "min-h-4 min-w-4 ml-[2px] inline-block ltr:mr-[10px] rtl:ml-[10px]",
-                              "mt-[2px]"
-                            )}
-                          />{" "}
-                          {t("event_type_seats", { numberOfSeats: bookingAttendees })}
-                        </div>
-                      )}
-                      {!rescheduleUid && eventType.recurringEvent && (
-                        <div className="flex items-start text-sm font-medium">
-                          <RefreshCcw className="float-left mt-[7px] ml-[2px] inline-block h-4 w-4 ltr:mr-[10px] rtl:ml-[10px] " />
-                          <div>
-                            <p className="mb-1 -ml-2 inline px-2 py-1">
-                              {getRecurringFreq({ t, recurringEvent: eventType.recurringEvent })}
-                            </p>
-
-                            <NumberInput
-                              defaultValue={eventType.recurringEvent.count}
-                              min="1"
-                              max={eventType.recurringEvent.count}
-                              isFullWidth={false}
-                              className="me-2 inline w-16"
-                              onChange={(event) => {
-                                setRecurringEventCount(parseInt(event?.target.value));
-                              }}
-                            />
-
-                            <p className="inline">
-                              {t("occurrence", {
-                                count: recurringEventCount,
-                              })}
-                            </p>
-                          </div>
-                        </div>
-                      )}
-                      {paymentAppData.price > 0 && (
-                        <p className="-ml-2 px-2 text-sm font-medium">
-                          <CreditCard className="ml-[2px] -mt-1 inline-block h-4 w-4 ltr:mr-[10px] rtl:ml-[10px]" />
-                          {paymentAppData.paymentOption === "HOLD" ? (
-                            <>
-                              {t("no_show_fee_amount", {
-                                amount: paymentAppData.price / 100.0,
-                                formatParams: { amount: { currency: paymentAppData.currency } },
-                              })}
-                            </>
-                          ) : (
-                            <>
-                              {new Intl.NumberFormat(i18n.language, {
-                                style: "currency",
-                                currency: paymentAppData.currency,
-                              }).format(paymentAppData.price / 100)}
-                            </>
-                          )}
-                        </p>
-                      )}
-                      {timezoneDropdown}
-                    </BookingDescription>
-
-                    {/* Temporarily disabled - booking?.startTime && rescheduleUid && (
+                          {timezoneDropdown}
+                          <div>{eventType.locations[selectedLocationInd].description ?? ""}</div>
+                          {/* Temporarily disabled - booking?.startTime && rescheduleUid && (
                     <div>
                       <p
                         className="mt-4 mb-3 text-default"
@@ -272,8 +277,11 @@ const AvailabilityPage = ({ profile, eventType, ...restProps }: Props) => {
                       </p>
                     </div>
                   )*/}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                )}
+                </div>
                 <SlotPicker
                   weekStart={
                     typeof profile.weekStart === "string"

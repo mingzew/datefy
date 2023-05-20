@@ -123,6 +123,13 @@ async function getUserPageProps(context: GetStaticPropsContext) {
           team: true,
         },
       },
+      favoriteActivitesDatetify: {
+        select: {
+          data: true,
+          type: true,
+          description: true,
+        },
+      },
     },
   });
   if (!user || !user.eventTypes.length) return { notFound: true };
@@ -181,6 +188,7 @@ async function getUserPageProps(context: GetStaticPropsContext) {
       isDynamic: false,
       trpcState: ssg.dehydrate(),
       isBrandingHidden: isBrandingHidden(user.hideBranding, hasActiveTeam || hasPremiumUserName),
+      favoriteActivites: user.favoriteActivitesDatetify,
     },
     revalidate: 10, // seconds
   };

@@ -95,6 +95,13 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         },
       },
       theme: true,
+      favoriteActivitesDatetify: {
+        select: {
+          data: true,
+          type: true,
+          description: true,
+        },
+      },
     },
   });
 
@@ -170,6 +177,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       booking,
       users: [user.username],
       isBrandingHidden: user.hideBranding,
+      favoriteActivites: user.favoriteActivitesDatetify,
     },
   };
 };
